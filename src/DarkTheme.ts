@@ -41,7 +41,7 @@ export const colors = {
   white: '#fff',
 }
 
-const backgroundColor = '#fff'
+const backgroundColor = '#b8b8b8'
 
 const theme: DefaultTheme = {
   fontSizes,
