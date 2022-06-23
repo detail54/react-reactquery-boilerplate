@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
       display: block;
     }
   }
-  section, article, header, main, footer, nav, div, ul, ol, li, a, h1, h2, h3, h4, h5, h6, button, p {
+  section, article, header, main, footer, nav, span, div, ul, ol, li, a, h1, h2, h3, h4, h5, h6, button, p {
     display: flex;
     box-sizing: border-box;
     margin: 0;
@@ -31,7 +31,7 @@ const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
   }
-  div, li, button {
+  span, div, li, button {
     align-items: center;
     justify-content: center;
   }

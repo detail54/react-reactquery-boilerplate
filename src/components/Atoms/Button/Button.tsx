@@ -1,11 +1,11 @@
 import React from 'react'
+import { ColorType, FontColorType, SizeType } from 'styleProps'
 import Buttons from './Button.styles'
-import { SizeType, FontColorType, ColorType } from '../../../styleProps'
 
 type ButtonType = 'BasicButton' | 'RoundButton'
 
 interface IProps {
-  type: ButtonType
+  type?: ButtonType
   size: SizeType
   fontColor?: FontColorType
   bgColor?: ColorType
@@ -14,7 +14,7 @@ interface IProps {
 }
 
 const Button: React.FC<IProps> = ({
-  type,
+  type = 'BasicButton',
   size,
   fontColor,
   bgColor,
@@ -35,6 +35,7 @@ const Button: React.FC<IProps> = ({
 }
 
 Button.defaultProps = {
+  type: 'BasicButton',
   fontColor: 'basic',
   bgColor: 'white',
 }

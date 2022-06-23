@@ -1,5 +1,11 @@
 import { DefaultTheme } from 'styled-components'
-import { FontSizeType, SizeType, ColorType, FontColorType } from './styleProps'
+import {
+  FontSizeType,
+  FontWeightType,
+  SizeType,
+  ColorType,
+  FontColorType,
+} from './styleProps'
 
 const calcRem = (size: number) => `${size / 16}rem`
 
@@ -13,6 +19,14 @@ const fontSizes: Record<FontSizeType, string> = {
   xxl: calcRem(24),
   xxxl: calcRem(32),
   titleSize: calcRem(48),
+}
+
+const fontWeight: Record<SizeType, FontWeightType> = {
+  xs: 100,
+  sm: 200,
+  md: 300,
+  lg: 400,
+  xl: 500,
 }
 
 const buttonWidth: Record<SizeType, string> = {
@@ -86,6 +100,7 @@ const backgroundColor = '#fff'
 const theme: DefaultTheme = {
   calcRem,
   fontSizes,
+  fontWeight,
   buttonWidth,
   buttonHeight,
   breakPoint,

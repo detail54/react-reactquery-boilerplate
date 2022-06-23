@@ -6,7 +6,7 @@ import DarkTheme from './ThemeDark'
 import GlobalStyle from './GlobalStyle'
 // components
 import Home from './pages/home'
-import Button from './components/Atoms/Button/Button'
+import Button from './components/atoms/button/Button'
 import AppWrap from './App.styles'
 
 const App = () => {

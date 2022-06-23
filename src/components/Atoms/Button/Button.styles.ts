@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import { IButtonStyleProps } from '../../../styleProps'
+import { IButtonStyleProps } from 'styleProps'
 
-const defaultButtonStyle = css<IButtonStyleProps>`
+const Button = styled.button<IButtonStyleProps>`
   ${({
     size,
     fontColor,
@@ -27,12 +27,11 @@ const defaultButtonStyle = css<IButtonStyleProps>`
   `}
 `
 
-const BasicButton = styled.button`
-  ${defaultButtonStyle}
+const BasicButton = styled(Button)`
+  border: 1px solid black;
 `
 
-const RoundButton = styled.button`
-  ${defaultButtonStyle}
+const RoundButton = styled(Button)`
   border: 1px solid black;
   border-radius: ${(props) => props.theme.calcRem(10)};
 `
