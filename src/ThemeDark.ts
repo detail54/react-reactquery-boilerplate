@@ -1,27 +1,8 @@
 import { DefaultTheme } from 'styled-components'
+import RightTheme from './ThemeRight'
+import { ColorType, FontColorType } from './styleProps'
 
-const calcRem = (size: number) => `${size / 16}rem`
-
-const fontSizes = {
-  xsm: calcRem(13.6),
-  sm: calcRem(13.6),
-  base: calcRem(16),
-  lg: calcRem(19.2),
-  xl: calcRem(20),
-  xxl: calcRem(24),
-  xxx: calcRem(32),
-  titleSize: calcRem(48),
-}
-
-const breakPoint = {
-  xs: '0',
-  sm: '576px',
-  md: '768px',
-  lg: '992px',
-  xl: '1200px',
-}
-
-export const colors = {
+export const colors: Record<ColorType, string> = {
   black_1: '#393939',
   black_2: '#2F2F2F',
   black_3: '#212121',
@@ -41,12 +22,18 @@ export const colors = {
   white: '#fff',
 }
 
-const backgroundColor = '#b8b8b8'
+const fontColors: Record<FontColorType, string> = {
+  basic: '#fff',
+  grey: '#d9d9d9',
+  white: '#000000',
+}
+
+const backgroundColor = '#202124'
 
 const theme: DefaultTheme = {
-  fontSizes,
-  breakPoint,
+  ...RightTheme,
   colors,
+  fontColors,
   backgroundColor,
 }
 

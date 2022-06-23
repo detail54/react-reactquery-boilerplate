@@ -4,8 +4,12 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-size: 1rem;
     margin: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    
+    #root {
+      display: block;
+    }
   }
   section, article, header, main, footer, nav, div, ul, ol, li, a, h1, h2, h3, h4, h5, h6, button, p {
     display: flex;
