@@ -1,20 +1,21 @@
 import React, { useState } from 'react'
+// layout
+import Header from 'layout/Header'
 // styles
 import { ThemeProvider } from 'styled-components'
+import GlobalStyle from './GlobalStyle'
 import RightTheme from './ThemeRight'
 import DarkTheme from './ThemeDark'
-import GlobalStyle from './GlobalStyle'
+import AppWrap from './App.styles'
 // components
 import Home from './pages/home'
-import Button from './components/atoms/button/Button'
-import AppWrap from './App.styles'
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
 
   const changeThemeButtonText = isDarkMode ? 'right mode' : 'dark mode'
 
-  const changeTheme = () => {
+  const onChangeTheme = () => {
     setIsDarkMode(!isDarkMode)
   }
 
@@ -22,12 +23,9 @@ const App = () => {
     <ThemeProvider theme={isDarkMode ? DarkTheme : RightTheme}>
       <GlobalStyle />
       <AppWrap>
-        <Button
-          type='RoundButton'
-          size='xl'
-          bgColor='orange_4'
-          text={changeThemeButtonText}
-          onClick={changeTheme}
+        <Header
+          changeThemeButtonText={changeThemeButtonText}
+          onChangeTheme={onChangeTheme}
         />
         <Home />
       </AppWrap>
