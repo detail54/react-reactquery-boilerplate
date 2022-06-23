@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
 // layout
 import Header from 'layout/Header'
+import Main from 'layout/Main'
 import Footer from 'layout/Footer'
 // styles
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle from './GlobalStyle'
 import RightTheme from './ThemeRight'
 import DarkTheme from './ThemeDark'
-import AppWrap from './App.styles'
-// components
-import Home from './pages/home'
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false)
@@ -23,14 +21,12 @@ const App = () => {
   return (
     <ThemeProvider theme={isDarkMode ? DarkTheme : RightTheme}>
       <GlobalStyle />
-      <AppWrap>
-        <Header
-          changeThemeButtonText={changeThemeButtonText}
-          onChangeTheme={onChangeTheme}
-        />
-        <Home />
-        <Footer />
-      </AppWrap>
+      <Header
+        changeThemeButtonText={changeThemeButtonText}
+        onChangeTheme={onChangeTheme}
+      />
+      <Main />
+      <Footer />
     </ThemeProvider>
   )
 }

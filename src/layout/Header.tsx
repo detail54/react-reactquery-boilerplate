@@ -12,6 +12,7 @@ interface IProps {
 const Header: React.FC<IProps> = ({ changeThemeButtonText, onChangeTheme }) => {
   return (
     <HeaderEl>
+      header
       <Button
         type='RoundButton'
         size='xl'

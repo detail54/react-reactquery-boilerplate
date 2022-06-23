@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 
-const AppWrap = styled.div`
+const MainEl = styled.main`
   width: 100vw;
   display: block;
   background-color: ${(props) => props.theme.backgroundColor};
-  color: ${(props) => props.theme.fontColors.basic};
+  color: ${(props) => props.theme.fontColors.themeColor};
 `
 
-export default AppWrap
+export default MainEl
