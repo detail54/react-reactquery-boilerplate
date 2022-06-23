@@ -7,13 +7,13 @@ import Text from 'components/atoms/text/Text'
 // styles
 import ListItems from './ListItem.styles'
 
-type ListItemType =
+export type ListItemType =
   | 'ListItem'
   | 'NumberListItem'
   | 'ButtonListItem'
   | 'NumberAndButtonListItem'
 
-interface IProps {
+export interface IListItemProps {
   type: ListItemType
   paddingX?: SizeType<'zero'>
   paddingY: SizeType<'zero'>
@@ -25,9 +25,10 @@ interface IProps {
   buttonSize?: SizeType
   buttonText?: string
   onClick?: () => void
+  buttonClick?: () => void
 }
 
-const ListItem: React.FC<IProps> = ({
+const ListItem: React.FC<IListItemProps> = ({
   type,
   paddingX,
   paddingY,
@@ -42,6 +43,7 @@ const ListItem: React.FC<IProps> = ({
     // eslint-disable-next-line no-alert
     alert('no onClick attribute')
   },
+  buttonClick,
 }) => {
   const ListItemEl = ListItems[type]
   const numberEl = (type === 'NumberListItem' ||
@@ -62,6 +64,7 @@ const ListItem: React.FC<IProps> = ({
       paddingY={paddingY}
       fontColor={fontColor}
       bgColor={bgColor}
+      onClick={buttonClick}
     >
       {numberEl}
       <Text text={content} fontColor={fontColor} />
@@ -79,6 +82,7 @@ ListItem.defaultProps = {
   buttonSize: undefined,
   buttonText: undefined,
   onClick: undefined,
+  buttonClick: undefined,
 }
 
 export default ListItem

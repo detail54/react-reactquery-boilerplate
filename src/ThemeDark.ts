@@ -25,7 +25,7 @@ export const colors: Record<ColorType, string> = {
 const fontColors: Record<FontColorType, string> = {
   themeColor: '#fff',
   grey: '#d9d9d9',
-  white: '#000000',
+  white: '#fff',
   black: '#000000',
 }
 
