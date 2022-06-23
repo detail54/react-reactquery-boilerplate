@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 // layout
 import Header from 'layout/Header'
+import Footer from 'layout/Footer'
 // styles
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle from './GlobalStyle'
@@ -28,6 +29,7 @@ const App = () => {
           onChangeTheme={onChangeTheme}
         />
         <Home />
+        <Footer />
       </AppWrap>
     </ThemeProvider>
   )
