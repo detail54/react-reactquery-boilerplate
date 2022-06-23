@@ -23,9 +23,10 @@ export const colors: Record<ColorType, string> = {
 }
 
 const fontColors: Record<FontColorType, string> = {
-  basic: '#fff',
+  themeColor: '#fff',
   grey: '#d9d9d9',
   white: '#000000',
+  black: '#000000',
 }
 
 const backgroundColor = '#202124'

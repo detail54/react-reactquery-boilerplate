@@ -53,7 +53,8 @@ const breakPoint: Record<SizeType, string> = {
   xl: calcRem(1200),
 }
 
-const paddings: Record<SizeType, string> = {
+const paddings: Record<SizeType<'zero'>, string> = {
+  zero: '0',
   xs: calcRem(8),
   sm: calcRem(10),
   md: calcRem(12),
@@ -61,7 +62,8 @@ const paddings: Record<SizeType, string> = {
   xl: calcRem(16),
 }
 
-const margins: Record<SizeType, string> = {
+const margins: Record<SizeType<'zero'>, string> = {
+  zero: '0',
   xs: calcRem(8),
   sm: calcRem(10),
   md: calcRem(12),
@@ -90,9 +92,10 @@ const colors: Record<ColorType, string> = {
 }
 
 const fontColors: Record<FontColorType, string> = {
-  basic: '#000000',
+  themeColor: '#000000',
   grey: '#808080',
   white: '#fff',
+  black: '#000000',
 }
 
 const backgroundColor = '#fff'

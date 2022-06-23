@@ -4,7 +4,7 @@ import IStyleProps from 'styleProps'
 const Text = styled.span<IStyleProps>`
   ${({ fontColor, fontSize, theme }) => css`
     font-size: ${fontSize ? theme.fontSizes[fontSize] : theme.fontSizes.base};
-    color: ${fontColor ? theme.fontColors[fontColor] : theme.fontColors.base};
+    color: ${fontColor ? theme.fontColors[fontColor] : theme.fontColors.black};
   `}
 `
 

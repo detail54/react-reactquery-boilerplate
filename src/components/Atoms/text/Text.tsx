@@ -1,4 +1,6 @@
 import React from 'react'
+// interface
+import { FontColorType } from 'styleProps'
 // styles
 import Texts from './Text.styles'
 
@@ -6,16 +8,18 @@ type TextType = 'Text' | 'BoldText'
 
 interface IProps {
   type?: TextType
-  text: string
+  fontColor?: FontColorType
+  text: string | number
 }
 
-const Text: React.FC<IProps> = ({ type = 'Text', text }) => {
+const Text: React.FC<IProps> = ({ type = 'Text', fontColor, text }) => {
   const TextEl = Texts[type]
-  return <TextEl>{text}</TextEl>
+  return <TextEl fontColor={fontColor}>{text}</TextEl>
 }
 
 Text.defaultProps = {
-  type: 'Text',
+  type: undefined,
+  fontColor: undefined,
 }
 
 export default Text

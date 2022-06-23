@@ -13,7 +13,7 @@
 
 ```
 
-## style pattern
+## style
 
 1. pattern
 

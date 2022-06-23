@@ -14,7 +14,7 @@ const Button = styled.button<IButtonStyleProps>`
   }) => css`
     width: ${theme.buttonWidth[size]};
     height: ${theme.buttonHeight[size]};
-    color: ${fontColor ? theme.fontColors[fontColor] : theme.fontColors.base};
+    color: ${fontColor ? theme.fontColors[fontColor] : theme.fontColors.black};
     background-color: ${bgColor ? theme.colors[bgColor] : theme.colors.white};
     padding-top: ${paddingY && theme.paddings[paddingY]};
     padding-bottom: ${paddingY && theme.paddings[paddingY]};

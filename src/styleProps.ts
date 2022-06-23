@@ -1,4 +1,4 @@
-export type SizeType = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
+export type SizeType<T = string> = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | T
 export type FontSizeType =
   | 'xxs'
   | 'xs'
@@ -10,7 +10,7 @@ export type FontSizeType =
   | 'xxxl'
   | 'titleSize'
 export type FontWeightType = 100 | 200 | 300 | 400 | 500 | 600
-export type FontColorType = 'basic' | 'grey' | 'white'
+export type FontColorType = 'themeColor' | 'grey' | 'white' | 'black'
 export type ColorType =
   | 'black_1'
   | 'black_2'
@@ -36,10 +36,10 @@ export default interface IStyleProps {
   fontWeight?: FontWeightType
   bgColor?: ColorType
   mediaSize?: SizeType
-  marginX?: SizeType
-  marginY?: SizeType
-  paddingX?: SizeType
-  paddingY?: SizeType
+  marginX?: SizeType<'zero'>
+  marginY?: SizeType<'zero'>
+  paddingX?: SizeType<'zero'>
+  paddingY?: SizeType<'zero'>
 }
 
 export interface IButtonStyleProps extends IStyleProps {
