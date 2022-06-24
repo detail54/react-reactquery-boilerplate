@@ -1,4 +1,6 @@
 import React from 'react'
+// lib
+import { Link } from 'react-router-dom'
 // components
 import ListItem from 'components/molecules/listItem/ListItem'
 // styles
@@ -10,6 +12,7 @@ const Home: React.FC = () => {
   }
   return (
     <HomeMain>
+      <Link to='/posts'>/posts</Link>
       <ListItem
         type='ListItem'
         paddingY='zero'
