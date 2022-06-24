@@ -1,15 +1,9 @@
 import { DefaultTheme } from 'styled-components'
-import {
-  FontSizeType,
-  FontWeightType,
-  SizeType,
-  ColorType,
-  FontColorType,
-} from './styleProps'
+import { TFontSize, TFontWeight, TSize, TColor, TFontColor } from './styleProps'
 
 const calcRem = (size: number) => `${size / 16}rem`
 
-const fontSizes: Record<FontSizeType, string> = {
+const fontSizes: Record<TFontSize, string> = {
   xxs: calcRem(10),
   xs: calcRem(13.6),
   small: calcRem(13.6),
@@ -21,7 +15,7 @@ const fontSizes: Record<FontSizeType, string> = {
   titleSize: calcRem(48),
 }
 
-const fontWeight: Record<SizeType, FontWeightType> = {
+const fontWeight: Record<TSize, TFontWeight> = {
   xs: 100,
   sm: 200,
   md: 300,
@@ -29,7 +23,7 @@ const fontWeight: Record<SizeType, FontWeightType> = {
   xl: 500,
 }
 
-const buttonWidth: Record<SizeType, string> = {
+const buttonWidth: Record<TSize, string> = {
   xs: calcRem(60),
   sm: calcRem(75),
   md: calcRem(100),
@@ -37,7 +31,7 @@ const buttonWidth: Record<SizeType, string> = {
   xl: calcRem(150),
 }
 
-const buttonHeight: Record<SizeType, string> = {
+const buttonHeight: Record<TSize, string> = {
   xs: calcRem(25),
   sm: calcRem(27),
   md: calcRem(29),
@@ -45,7 +39,7 @@ const buttonHeight: Record<SizeType, string> = {
   xl: calcRem(35),
 }
 
-const breakPoint: Record<SizeType, string> = {
+const breakPoint: Record<TSize, string> = {
   xs: '0',
   sm: calcRem(576),
   md: calcRem(786),
@@ -53,7 +47,7 @@ const breakPoint: Record<SizeType, string> = {
   xl: calcRem(1200),
 }
 
-const paddings: Record<SizeType<'zero'>, string> = {
+const paddings: Record<TSize<'zero'>, string> = {
   zero: '0',
   xs: calcRem(8),
   sm: calcRem(10),
@@ -62,7 +56,7 @@ const paddings: Record<SizeType<'zero'>, string> = {
   xl: calcRem(16),
 }
 
-const margins: Record<SizeType<'zero'>, string> = {
+const margins: Record<TSize<'zero'>, string> = {
   zero: '0',
   xs: calcRem(8),
   sm: calcRem(10),
@@ -71,7 +65,7 @@ const margins: Record<SizeType<'zero'>, string> = {
   xl: calcRem(16),
 }
 
-const colors: Record<ColorType, string> = {
+const colors: Record<TColor, string> = {
   black_1: '#393939',
   black_2: '#2F2F2F',
   black_3: '#212121',
@@ -91,7 +85,7 @@ const colors: Record<ColorType, string> = {
   white: '#fff',
 }
 
-const fontColors: Record<FontColorType, string> = {
+const fontColors: Record<TFontColor, string> = {
   themeColor: '#000000',
   grey: '#808080',
   white: '#fff',

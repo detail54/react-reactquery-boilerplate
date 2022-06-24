@@ -1,8 +1,8 @@
 import { DefaultTheme } from 'styled-components'
 import RightTheme from './ThemeRight'
-import { ColorType, FontColorType } from './styleProps'
+import { TColor, TFontColor } from './styleProps'
 
-export const colors: Record<ColorType, string> = {
+export const colors: Record<TColor, string> = {
   black_1: '#393939',
   black_2: '#2F2F2F',
   black_3: '#212121',
@@ -22,7 +22,7 @@ export const colors: Record<ColorType, string> = {
   white: '#fff',
 }
 
-const fontColors: Record<FontColorType, string> = {
+const fontColors: Record<TFontColor, string> = {
   themeColor: '#fff',
   grey: '#d9d9d9',
   white: '#fff',

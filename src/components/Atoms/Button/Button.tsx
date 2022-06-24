@@ -1,14 +1,14 @@
 import React from 'react'
-import { ColorType, FontColorType, SizeType } from 'styleProps'
+import { TColor, TFontColor, TSize } from 'styleProps'
 import Buttons from './Button.styles'
 
 export type ButtonType = 'BasicButton' | 'RoundButton'
 
 interface IProps {
   type?: ButtonType
-  size: SizeType
-  fontColor?: FontColorType
-  bgColor?: ColorType
+  size: TSize
+  fontColor?: TFontColor
+  bgColor?: TColor
   text: string
   onClick: () => void
 }

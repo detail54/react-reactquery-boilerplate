@@ -1,5 +1,5 @@
-export type SizeType<T = string> = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | T
-export type FontSizeType =
+export type TSize<T = string> = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | T
+export type TFontSize =
   | 'xxs'
   | 'xs'
   | 'small'
@@ -9,9 +9,9 @@ export type FontSizeType =
   | 'xxl'
   | 'xxxl'
   | 'titleSize'
-export type FontWeightType = 100 | 200 | 300 | 400 | 500 | 600
-export type FontColorType = 'themeColor' | 'grey' | 'white' | 'black'
-export type ColorType =
+export type TFontWeight = 100 | 200 | 300 | 400 | 500 | 600
+export type TFontColor = 'themeColor' | 'grey' | 'white' | 'black'
+export type TColor =
   | 'black_1'
   | 'black_2'
   | 'black_3'
@@ -31,17 +31,17 @@ export type ColorType =
   | 'white'
 
 export default interface IStyleProps {
-  fontColor?: FontColorType
-  fontSize?: FontSizeType
-  fontWeight?: FontWeightType
-  bgColor?: ColorType
-  mediaSize?: SizeType
-  marginX?: SizeType<'zero'>
-  marginY?: SizeType<'zero'>
-  paddingX?: SizeType<'zero'>
-  paddingY?: SizeType<'zero'>
+  fontColor?: TFontColor
+  fontSize?: TFontSize
+  fontWeight?: TFontWeight
+  bgColor?: TColor
+  mediaSize?: TSize
+  marginX?: TSize<'zero'>
+  marginY?: TSize<'zero'>
+  paddingX?: TSize<'zero'>
+  paddingY?: TSize<'zero'>
 }
 
 export interface IButtonStyleProps extends IStyleProps {
-  size: SizeType
+  size: TSize
 }

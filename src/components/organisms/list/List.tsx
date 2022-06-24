@@ -1,10 +1,10 @@
 import React, { useId } from 'react'
 // conponents & type
 import ListItem, {
-  ListItemType,
+  TListItem,
   IListItemProps,
 } from 'components/molecules/listItem/ListItem'
-import { FontColorType, ColorType, SizeType } from 'styleProps'
+import { TFontColor, TColor, TSize } from 'styleProps'
 // style
 import Lists from './List.styles'
 
@@ -12,11 +12,11 @@ type ListTypee = 'List'
 
 interface IProps {
   type: ListTypee
-  listItemType: ListItemType
-  bgColor?: ColorType
-  fontColor?: FontColorType
-  paddingX?: SizeType<'zero'>
-  paddingY?: SizeType<'zero'>
+  listItemType: TListItem
+  bgColor?: TColor
+  fontColor?: TFontColor
+  paddingX?: TSize<'zero'>
+  paddingY?: TSize<'zero'>
   contents: IListItemProps[]
 }
 

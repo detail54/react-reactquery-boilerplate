@@ -1,28 +1,28 @@
 import React from 'react'
 // interface
-import { ColorType, FontColorType, SizeType } from 'styleProps'
+import { TColor, TFontColor, TSize } from 'styleProps'
 import Button, { ButtonType } from 'components/atoms/button/Button'
 // components
 import Text from 'components/atoms/text/Text'
 // styles
 import ListItems from './ListItem.styles'
 
-export type ListItemType =
+export type TListItem =
   | 'ListItem'
   | 'NumberListItem'
   | 'ButtonListItem'
   | 'NumberAndButtonListItem'
 
 export interface IListItemProps {
-  type: ListItemType
-  paddingX?: SizeType<'zero'>
-  paddingY: SizeType<'zero'>
-  fontColor?: FontColorType
-  bgColor?: ColorType
+  type: TListItem
+  paddingX?: TSize<'zero'>
+  paddingY: TSize<'zero'>
+  fontColor?: TFontColor
+  bgColor?: TColor
   itemNumber?: number
   content: string | number
   button?: ButtonType
-  buttonSize?: SizeType
+  buttonSize?: TSize
   buttonText?: string
   onClick?: () => void
   buttonClick?: () => void

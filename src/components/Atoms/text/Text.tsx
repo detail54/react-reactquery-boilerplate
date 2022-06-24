@@ -1,14 +1,14 @@
 import React from 'react'
 // interface
-import { FontColorType } from 'styleProps'
+import { TFontColor } from 'styleProps'
 // styles
 import Texts from './Text.styles'
 
-type TextType = 'Text' | 'BoldText'
+type TText = 'Text' | 'BoldText'
 
 interface IProps {
-  type?: TextType
-  fontColor?: FontColorType
+  type?: TText
+  fontColor?: TFontColor
   text: string | number
 }
 
