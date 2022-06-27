@@ -4,6 +4,8 @@ import { IBoareStyleProps } from 'styleProps'
 
 const Header = styled.h2`
   justify-content: center;
+  background-color: ${({ theme }) => theme.colors.navy_1};
+  color: ${({ theme }) => theme.colors.white};
 `
 
 const Board = styled.section<IBoareStyleProps>`

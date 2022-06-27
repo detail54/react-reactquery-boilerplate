@@ -4,12 +4,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 // components
 import Home from 'pages/home'
 import Posts from 'pages/posts'
-// styles
-import MainEl from './Main.styles'
 
 const Main: React.FC = () => {
   return (
-    <MainEl>
+    <>
       main
       <BrowserRouter>
         <Routes>
@@ -18,7 +16,7 @@ const Main: React.FC = () => {
           {/* <Route path='*' element={<NotFound />} /> */}
         </Routes>
       </BrowserRouter>
-    </MainEl>
+    </>
   )
 }
 

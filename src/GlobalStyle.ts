@@ -1,11 +1,14 @@
 import { createGlobalStyle } from 'styled-components'
+import { ITheme } from 'styleProps'
 
-const GlobalStyle = createGlobalStyle`
+export default createGlobalStyle<{ theme: ITheme }>`
   body {
     font-size: 1rem;
     margin: 0;
     width: 100vw;
     height: 100vh;
+    background-color: ${({ theme }) => theme.backgroundColor};
+    color: ${({ theme }) => theme.fontColors.themeColor};
     
     #root {
       display: block;
@@ -36,5 +39,3 @@ const GlobalStyle = createGlobalStyle`
     justify-content: center;
   }
 `
-
-export default GlobalStyle

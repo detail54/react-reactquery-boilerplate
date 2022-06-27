@@ -30,6 +30,20 @@ export type TColor =
   | 'grey_4'
   | 'white'
 
+export interface ITheme {
+  calcRem: (size: number) => string
+  fontSizes: Record<TFontSize, string>
+  fontWeight: Record<TSize, TFontWeight>
+  buttonWidth: Record<TSize, string>
+  buttonHeight: Record<TSize, string>
+  breakPoint: Record<TSize, string>
+  paddings: Record<TSize<'zero'>, string>
+  margins: Record<TSize<'zero'>, string>
+  colors: Record<TColor, string>
+  fontColors: Record<TFontColor, string>
+  backgroundColor: string
+}
+
 export default interface IStyleProps {
   fontColor?: TFontColor
   fontSize?: TFontSize
