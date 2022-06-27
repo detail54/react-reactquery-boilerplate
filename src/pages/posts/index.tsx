@@ -5,24 +5,46 @@ import { useQuery } from 'hooks/useReactQuery'
 import { getPosts, IPost } from 'api/posts'
 // error
 import { AxiosError } from 'axios'
+// components & type
+import { IListItemProps } from 'components/molecules/listItem/ListItem'
+import Board from 'components/templates/Board'
 // styles
 import PostsEl from './index.styles'
 
 const Posts: React.FC = () => {
-  const errors = (error: AxiosError) => {
+  const onError = (error: AxiosError) => {
     console.log(error)
   }
 
-  const { data, error, isLoading, isError } = useQuery<IPost[], 'posts'>({
+  const {
+    data: postsData,
+    error,
+    isLoading,
+    isError,
+  } = useQuery<IPost[], 'posts'>({
     queryFn: getPosts,
+    onError,
   })
 
-  console.log('data::', data)
-  console.log('error:::', error)
-  console.log('isLoading:::', isLoading)
-  console.log('isError:::', isError)
+  const contents: IListItemProps[] | undefined = postsData?.map(
+    (content, index) => ({
+      type: 'NumberListItem',
+      content: content.title,
+      paddingY: 'md',
+      itemNumber: index + 1,
+    }),
+  )
 
-  return <PostsEl>posts</PostsEl>
+  return (
+    <PostsEl>
+      <Board
+        type='BasicBoard'
+        headerText='Posts'
+        contents={contents}
+        height={500}
+      />
+    </PostsEl>
+  )
 }
 
 export default Posts

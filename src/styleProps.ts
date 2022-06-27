@@ -45,3 +45,7 @@ export default interface IStyleProps {
 export interface IButtonStyleProps extends IStyleProps {
   size: TSize
 }
+
+export interface IBoareStyleProps extends IStyleProps {
+  height: number
+}

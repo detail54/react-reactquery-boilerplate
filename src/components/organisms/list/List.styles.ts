@@ -9,7 +9,15 @@ const List = styled.ul<IStyleProps>`
     padding-left: ${paddingX && theme.paddings[paddingX]};
     padding-right: ${paddingX && theme.paddings[paddingX]};
   `}
-  border: 1px solid black;
+  flex-direction: column;
+
+  li:nth-child(1) {
+    border-top: 1px solid black;
+  }
+
+  li:nth-last-child(1) {
+    border: none;
+  }
 `
 
 export default {

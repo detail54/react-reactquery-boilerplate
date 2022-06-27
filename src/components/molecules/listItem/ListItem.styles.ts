@@ -10,7 +10,7 @@ const ListItem = styled.li<IStyleProps>`
     padding-left: ${paddingX && theme.paddings[paddingX]};
     padding-right: ${paddingX && theme.paddings[paddingX]};
   `}
-  border: 1px solid black;
+  border-bottom: 1px solid black;
 `
 
 const LeftListItem = styled(ListItem)`
@@ -20,6 +20,7 @@ const LeftListItem = styled(ListItem)`
 const NumberListItem = styled(LeftListItem)`
   span:nth-child(1) {
     flex: 0;
+    padding: 0 10px;
   }
   span:nth-child(2) {
     flex: 1;

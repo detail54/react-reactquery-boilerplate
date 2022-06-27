@@ -20,7 +20,7 @@ export interface IListItemProps {
   fontColor?: TFontColor
   bgColor?: TColor
   itemNumber?: number
-  content: string | number
+  content: string | number | undefined
   button?: ButtonType
   buttonSize?: TSize
   buttonText?: string

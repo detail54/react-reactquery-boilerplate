@@ -9,7 +9,7 @@ type TText = 'Text' | 'BoldText'
 interface IProps {
   type?: TText
   fontColor?: TFontColor
-  text: string | number
+  text: string | number | undefined
 }
 
 const Text: React.FC<IProps> = ({ type = 'Text', fontColor, text }) => {
