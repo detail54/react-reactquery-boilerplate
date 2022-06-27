@@ -8,6 +8,8 @@ import { AxiosError } from 'axios'
 // components & type
 import { IListItemProps } from 'components/molecules/listItem/ListItem'
 import Board from 'components/templates/Board'
+// lib
+import { Link } from 'react-router-dom'
 // styles
 import PostsEl from './index.styles'
 
@@ -29,7 +31,7 @@ const Posts: React.FC = () => {
   const contents: IListItemProps[] | undefined = postsData?.map(
     (content, index) => ({
       type: 'NumberListItem',
-      content: content.title,
+      content: <Link to={`/post/${content.id}`}>{content.title}</Link>,
       paddingY: 'md',
       itemNumber: index + 1,
     }),
