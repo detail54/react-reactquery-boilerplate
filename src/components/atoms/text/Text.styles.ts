@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components'
-import IStyleProps from 'styleProps'
+import styled, { css, IStyleProps } from 'styled-components'
 
 const Text = styled.span<IStyleProps>`
   ${({ fontColor, fontSize, theme }) => css`

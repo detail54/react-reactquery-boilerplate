@@ -1,5 +1,5 @@
+import { DefaultTheme, TColor, TFontColor } from 'styled-components'
 import RightTheme from './ThemeRight'
-import { TColor, TFontColor, ITheme } from './styleProps'
 
 export const colors: Record<TColor, string> = {
   black_1: '#393939',
@@ -30,7 +30,7 @@ const fontColors: Record<TFontColor, string> = {
 
 const backgroundColor = '#202124'
 
-const theme: ITheme = {
+const theme: DefaultTheme = {
   ...RightTheme,
   colors,
   fontColors,

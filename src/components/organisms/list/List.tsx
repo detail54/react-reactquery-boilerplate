@@ -1,10 +1,10 @@
 import React, { useId } from 'react'
 // conponents & type
+import { TColor, TFontColor, TSize } from 'styled-components'
 import ListItem, {
   TListItem,
   IListItemProps,
 } from 'components/molecules/listItem/ListItem'
-import { TFontColor, TColor, TSize } from 'styleProps'
 // style
 import Lists from './List.styles'
 

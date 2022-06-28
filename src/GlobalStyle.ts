@@ -1,7 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
-import { ITheme } from 'styleProps'
+import { createGlobalStyle, DefaultTheme } from 'styled-components'
 
-export default createGlobalStyle<{ theme: ITheme }>`
+export default createGlobalStyle<{ theme: DefaultTheme }>`
   body {
     font-size: 1rem;
     margin: 0;

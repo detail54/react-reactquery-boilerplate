@@ -1,9 +1,10 @@
 import React from 'react'
 // lib
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useMatch } from 'react-router-dom'
 // components
 import Home from 'pages/home'
 import Posts from 'pages/posts'
+import Post from 'pages/posts/Post'
 import NotFound from 'pages/notfound/NotFound'
 
 const Main: React.FC = () => {
@@ -13,8 +14,8 @@ const Main: React.FC = () => {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/posts' element={<Posts />} />
-          <Route path='/post/:id' element={<Posts />} />
+          <Route path='posts' element={<Posts />} />
+          <Route path='posts/:id' element={<Post />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </BrowserRouter>

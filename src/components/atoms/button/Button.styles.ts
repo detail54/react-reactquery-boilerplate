@@ -1,5 +1,4 @@
-import styled, { css } from 'styled-components'
-import { IButtonStyleProps } from 'styleProps'
+import styled, { css, IButtonStyleProps } from 'styled-components'
 
 const Button = styled.button<IButtonStyleProps>`
   ${({

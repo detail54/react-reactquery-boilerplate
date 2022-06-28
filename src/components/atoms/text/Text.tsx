@@ -1,6 +1,6 @@
 import React from 'react'
 // interface
-import { TFontColor } from 'styleProps'
+import { TFontColor } from 'styled-components'
 // styles
 import Texts from './Text.styles'
 

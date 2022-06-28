@@ -7,7 +7,7 @@ import HomeMain from './index.styles'
 const Home: React.FC = () => {
   return (
     <HomeMain>
-      <Link to='/posts'>/posts</Link>
+      <Link to='posts'>/posts</Link>
     </HomeMain>
   )
 }

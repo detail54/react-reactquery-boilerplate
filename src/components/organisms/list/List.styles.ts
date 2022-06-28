@@ -1,6 +1,4 @@
-import styled, { css } from 'styled-components'
-// interface
-import IStyleProps from 'styleProps'
+import styled, { css, IStyleProps } from 'styled-components'
 
 const List = styled.ul<IStyleProps>`
   ${({ paddingX, paddingY, theme }) => css`

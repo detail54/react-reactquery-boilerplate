@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-// innterface
-import { IBoareStyleProps } from 'styleProps'
+import styled, { IBoareStyleProps } from 'styled-components'
 
 const Header = styled.h2`
   justify-content: center;

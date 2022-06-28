@@ -1,7 +1,7 @@
 import React from 'react'
 // interface
-import { TColor, TFontColor, TSize } from 'styleProps'
 import Button, { ButtonType } from 'components/atoms/button/Button'
+import { TColor, TFontColor, TSize } from 'styled-components'
 // components
 import Text from 'components/atoms/text/Text'
 // styles

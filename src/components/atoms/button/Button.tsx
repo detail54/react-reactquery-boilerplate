@@ -1,5 +1,5 @@
 import React from 'react'
-import { TColor, TFontColor, TSize } from 'styleProps'
+import { TColor, TFontColor, TSize } from 'styled-components'
 import Buttons from './Button.styles'
 
 export type ButtonType = 'BasicButton' | 'RoundButton'

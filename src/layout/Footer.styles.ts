@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled, { IStyleProps } from 'styled-components'
 
-const FooterEl = styled.footer`
+const FooterEl = styled.footer<IStyleProps>`
   width: 100vw;
   position: fixed;
   bottom: 0;

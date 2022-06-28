@@ -1,51 +1,37 @@
 import React from 'react'
-// hook
-import { useQuery } from 'hooks/useReactQuery'
-// api
-import { getPosts, IPost } from 'api/posts'
-// error
-import { AxiosError } from 'axios'
 // components & type
 import { IListItemProps } from 'components/molecules/listItem/ListItem'
-import Board from 'components/templates/Board'
+import Board from 'components/templates/board/Board'
 // lib
 import { Link } from 'react-router-dom'
+// hooks
+import usePost from 'hooks/usePost'
 // styles
-import PostsEl from './index.styles'
+import PostsMain from './index.styles'
 
 const Posts: React.FC = () => {
-  const onError = (error: AxiosError) => {
-    console.log(error)
-  }
-
-  const {
-    data: postsData,
-    error,
-    isLoading,
-    isError,
-  } = useQuery<IPost[], 'posts'>({
-    queryFn: getPosts,
-    onError,
-  })
+  const { getPosts } = usePost()
+  const { data: postsData, isLoading, error, isError } = getPosts()
 
   const contents: IListItemProps[] | undefined = postsData?.map(
     (content, index) => ({
       type: 'NumberListItem',
-      content: <Link to={`/post/${content.id}`}>{content.title}</Link>,
+      content: <Link to={`/posts/${content.id}`}>{content.title}</Link>,
       paddingY: 'md',
       itemNumber: index + 1,
     }),
   )
 
   return (
-    <PostsEl>
+    <PostsMain>
       <Board
         type='BasicBoard'
         headerText='Posts'
         contents={contents}
         height={500}
+        isLoading={isLoading}
       />
-    </PostsEl>
+    </PostsMain>
   )
 }
 

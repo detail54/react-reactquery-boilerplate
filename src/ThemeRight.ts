@@ -1,11 +1,11 @@
 import {
+  DefaultTheme,
+  TColor,
+  TFontColor,
   TFontSize,
   TFontWeight,
   TSize,
-  TColor,
-  TFontColor,
-  ITheme,
-} from './styleProps'
+} from 'styled-components'
 
 const calcRem = (size: number) => `${size / 16}rem`
 
@@ -100,7 +100,7 @@ const fontColors: Record<TFontColor, string> = {
 
 const backgroundColor = '#fff'
 
-const theme: ITheme = {
+const theme: DefaultTheme = {
   calcRem,
   fontSizes,
   fontWeight,
