@@ -90,6 +90,7 @@
 3. <strong>style props interface</strong>
 
    > - src/styled.d.ts 에서 모든 style관련된 타입을 선언.
+   >   https://github.com/detail54/react-reactquery-boilerplate/blob/17a462ec504b9e86c18e86151d0929edc8da307e/src/styled.d.ts#L1-L70
 
 4. <strong>GlobalStyle</strong>
 
@@ -98,4 +99,5 @@
 5. <strong>create styled components</strong>
 
    > - 같은 Elements type 의 components를 여러개 만들 경우 basic style을 가지고 있는 compnenet를 만들어 하위에서 상속받아서 사용.
-   > - basic styled components는 generic에 IStyleProps interface를 상속받은 interface를 넣고, props들을 열거하여 theme와 그 외 props값을 같이 사용할 수 있게 한다.<br /> > https://github.com/detail54/react-reactquery-boilerplate/blob/fb36ce06a1ac6b66b9553877a96701955f1373b2/src/components/atoms/button/Button.styles.ts#L1-L42
+   > - basic styled components는 generic에 IStyleProps interface를 상속받은 interface를 넣고, props들을 열거하여 theme와 그 외 props값을 같이 사용할 수 있게 한다.
+   >   https://github.com/detail54/react-reactquery-boilerplate/blob/fb36ce06a1ac6b66b9553877a96701955f1373b2/src/components/atoms/button/Button.styles.ts#L1-L42

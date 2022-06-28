@@ -1,6 +1,6 @@
-import { createGlobalStyle, DefaultTheme } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
-export default createGlobalStyle<{ theme: DefaultTheme }>`
+export default createGlobalStyle`
   body {
     font-size: 1rem;
     margin: 0;
@@ -22,9 +22,12 @@ export default createGlobalStyle<{ theme: DefaultTheme }>`
   h1, h2, h3, h4, h5, h6 {
     font-weight: 500;
   }
-  
   ul, ol {
     list-style: none;
+  }
+  button, div, span, li {
+    align-items: center;
+    justify-content: center;
   }
   a {
     color: black;
@@ -33,8 +36,23 @@ export default createGlobalStyle<{ theme: DefaultTheme }>`
   button {
     cursor: pointer;
   }
-  span, div, li, button {
-    align-items: center;
-    justify-content: center;
+  // react-query devtools style
+  .devtools {
+    align-items: flex-start;
+    & div, & span {
+      display: block;
+      align-items: initial;
+      justify-content: initial;
+    }
+    & > div + div > div + div + div + div {
+      display: flex;
+      button {
+        margin-right: 5px;
+      }
+      span {
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+    }
   }
 `

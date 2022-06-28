@@ -4,6 +4,7 @@ import Main from 'layout/Main'
 import Footer from 'layout/Footer'
 import { ThemeProvider } from 'styled-components'
 import { QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
 import queryClient from './config/reactQuery'
 import GlobalStyle from './GlobalStyle'
 import RightTheme from './ThemeRight'
@@ -29,6 +30,11 @@ const App: React.FC = () => {
         <Main />
         <Footer />
       </ThemeProvider>
+      <ReactQueryDevtools
+        initialIsOpen={false}
+        position='bottom-right'
+        panelProps={{ className: 'devtools' }}
+      />
     </QueryClientProvider>
   )
 }

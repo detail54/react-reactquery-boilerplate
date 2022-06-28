@@ -23,6 +23,8 @@ const Button = styled.button<IButtonStyleProps>`
     margin-bottom: ${marginY && theme.margins[marginY]};
     margin-left: ${marginX && theme.margins[marginX]};
     margin-right: ${marginX && theme.margins[marginX]};
+    align-items: center;
+    justify-content: center;
   `}
 `
 
