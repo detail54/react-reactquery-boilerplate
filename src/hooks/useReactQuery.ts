@@ -34,6 +34,7 @@ export const useQuery = <T>(
     ({ queryKey }) => get<T>({ queryKey }),
     {
       enabled: !!url,
+      onError,
       useErrorBoundary: !onError,
       ...options,
     },

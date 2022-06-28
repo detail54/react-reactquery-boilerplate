@@ -25,7 +25,8 @@
   https://github.com/detail54/react-reactquery-boilerplate/blob/a51cbc7b7f5331043955d1dcd28fd4e3fc8ecddd/src/config/reactQuery.ts#L1-L16
 
 - error처리를 react-query에게 맡길경우 위에 설정한 useErrorBoundary를 false로 변경해야 할 필요가 있음. <br />
-  그래서 error 콜백을 넘겨줄 때에만 useErrorBoundary를 false로 변경처리 하기위해 useQuery를 한번 더 감싸서 onError가 있을 경우에만 변경되도록 처리한다.
+  그래서 error 콜백을 넘겨줄 때에만 useErrorBoundary를 false로 변경처리 하기위해 useQuery를 한번 더 감싸서 onError가 있을 경우에만 변경되도록 처리한다.<br />
+  실제로 useQuery를 사용할때는 react-query 가 아닌 src/hooks/useReactQuery 의 useQuery를 사용.
 - 이때 파라미터로 url, params를 받아오고 만들어놓은 get함수를 호출하는 콜백을 queryFn 값으로 넘겨준다.
   https://github.com/detail54/react-reactquery-boilerplate/blob/a51cbc7b7f5331043955d1dcd28fd4e3fc8ecddd/src/hooks/useReactQuery.ts#L1-L42
 
@@ -56,5 +57,4 @@
 5. <strong>create styled components</strong>
 
    > - 같은 Elements type 의 components를 여러개 만들 경우 basic style을 가지고 있는 compnenet를 만들어 하위에서 상속받아서 사용.
-   > - basic styled components는 generic에 IStyleProps interface를 상속받은 interface를 넣고, props들을 열거하여 theme와 그 외 props값을 같이 사용할 수 있게 한다.<br />
-   >   https://github.com/detail54/react-reactquery-boilerplate/blob/fb36ce06a1ac6b66b9553877a96701955f1373b2/src/components/atoms/button/Button.styles.ts#L1-L42
+   > - basic styled components는 generic에 IStyleProps interface를 상속받은 interface를 넣고, props들을 열거하여 theme와 그 외 props값을 같이 사용할 수 있게 한다.<br /> > https://github.com/detail54/react-reactquery-boilerplate/blob/fb36ce06a1ac6b66b9553877a96701955f1373b2/src/components/atoms/button/Button.styles.ts#L1-L42
