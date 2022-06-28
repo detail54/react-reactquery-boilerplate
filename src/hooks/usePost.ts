@@ -1,4 +1,4 @@
-import API_URL from './api/apis'
+import API_URL from './api/urls'
 // interface
 import { IPost } from './api/interface'
 // hooks

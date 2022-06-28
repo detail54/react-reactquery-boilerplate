@@ -36,8 +36,8 @@
     │   └── reactQuery.ts
     ├── hooks
     │   ├── api
-    │   │   ├── apis.ts
-    │   │   └── interface.ts
+    │   │   ├── interface.ts
+    │   │   └── urls.ts
     │   ├── usePost.ts
     │   └── useReactQuery.ts
     ├── layout
