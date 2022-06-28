@@ -10,7 +10,48 @@
 ## directory structure
 
 ```
-
+└── src
+    ├── components
+    │   ├── atoms
+    │   │   ├── button
+    │   │   │   ├── Button.styles.ts
+    │   │   │   └── Button.tsx
+    │   │   └── text
+    │   │       ├── Text.styles.ts
+    │   │       └── Text.tsx
+    │   ├── molecules
+    │   │   └── listItem
+    │   │       ├── ListItem.styles.ts
+    │   │       └── ListItem.tsx
+    │   ├── organisms
+    │   │   └── list
+    │   │       ├── List.styles.ts
+    │   │       └── List.tsx
+    │   └── templates
+    │       └── board
+    │           ├── Board.styles.ts
+    │           └── Board.tsx
+    ├── config
+    │   ├── axios.ts
+    │   └── reactQuery.ts
+    ├── hooks
+    │   ├── api
+    │   │   ├── apis.ts
+    │   │   └── interface.ts
+    │   ├── usePost.ts
+    │   └── useReactQuery.ts
+    ├── layout
+    │   ├── Footer.styles.ts
+    │   ├── Footer.tsx
+    │   ├── Header.styles.ts
+    │   ├── Header.tsx
+    │   └── Main.tsx
+    └── pages
+        ├── home
+        │   └── index.tsx
+        └── post
+            ├── Post.tsx
+            └── index.tsx
 ```
 
 ## server state
