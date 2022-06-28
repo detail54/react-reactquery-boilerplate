@@ -17,73 +17,17 @@
 
 - axios를 사용하여 api 통신한다.<br />
   instance 객체를 생성하여 기본 설정값을 세팅 해 놓고 import 해서 사용.
-
-```tsx
-// src/config/axios.ts
-const api: AxiosInstance = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
-  headers: {
-    'Content-Type': 'application/json',
-    'X-Access-Token': 'access-token',
-  },
-  timeout: 10000,
-})
-```
+  https://github.com/detail54/react-reactquery-boilerplate/blob/a51cbc7b7f5331043955d1dcd28fd4e3fc8ecddd/src/config/axios.ts#L1-L12
 
 - react-query를 사용하여 server state관리.<br />
   QueryClient의 기본설정 세팅하여 모든 hook에 설정 적용되도록 함.<br />
   useErrorBoundary를 true로 설정하여 호출한 곳 에서 직접 에러를 처리하도록 함.
-
-```ts
-export default new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 0,
-      useErrorBoundary: true,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
-      refetchOnWindowFocus: false,
-    },
-    mutations: {
-      useErrorBoundary: true,
-    },
-  },
-})
-```
+  https://github.com/detail54/react-reactquery-boilerplate/blob/a51cbc7b7f5331043955d1dcd28fd4e3fc8ecddd/src/config/reactQuery.ts#L1-L16
 
 - error처리를 react-query에게 맡길경우 위에 설정한 useErrorBoundary를 false로 변경해야 할 필요가 있음. <br />
   그래서 error 콜백을 넘겨줄 때에만 useErrorBoundary를 false로 변경처리 하기위해 useQuery를 한번 더 감싸서 onError가 있을 경우에만 변경되도록 처리한다.
 - 이때 파라미터로 url, params를 받아오고 만들어놓은 get함수를 호출하는 콜백을 queryFn 값으로 넘겨준다.
-
-```tsx
-// src/hooks/useReactQuery.ts
-const get = async <T,>({
-  queryKey,
-}: Omit<QueryFunctionContext<TQueryKey>, 'meta'>): Promise<T> => {
-  const [url, params] = queryKey
-  const { data } = await api.get<T>(url, { ...params })
-
-  return data
-}
-
-export const useQuery = <T,>(
-  url: string,
-  parmas?: object,
-  options?: Omit<UseQueryOptions<T, Error, T, TQueryKey>, 'queryKey'>,
-): UseQueryResult<T, Error> => {
-  const onError = options && options.onError
-
-  return useQueryOrigin<T, Error, T, TQueryKey>(
-    [url, parmas],
-    ({ queryKey }) => get<T>({ queryKey }),
-    {
-      enabled: !!url,
-      useErrorBoundary: !onError,
-      ...options,
-    },
-  )
-}
-```
+  https://github.com/detail54/react-reactquery-boilerplate/blob/a51cbc7b7f5331043955d1dcd28fd4e3fc8ecddd/src/hooks/useReactQuery.ts#L1-L42
 
 ## style
 
