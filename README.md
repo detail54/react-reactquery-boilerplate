@@ -1,13 +1,11 @@
 # react-reactQuery-boilerplat
 
-```
-  - react  v18.2.0
-  - react-router-dom  v6.3.0
-  - react-query  v3.39.1
-  - axios  v0.27.2
-  - styled-components  v5.3.5
-  - styled-normalize  v8.0.7
-```
+> - react v18.2.0
+> - react-router-dom v6.3.0
+> - react-query v3.39.1
+> - axios v0.27.2
+> - styled-components v5.3.5
+> - styled-normalize v8.0.7
 
 ## directory structure
 
@@ -30,13 +28,6 @@ const api: AxiosInstance = axios.create({
   },
   timeout: 10000,
 })
-
-// src/api/posts.ts
-const getPosts = async (): Promise<IPost[]> => {
-  const { data: posts } = await api.get(API_URL.posts)
-
-  return posts
-}
 ```
 
 - react-query를 사용하여 server state관리.<br />
@@ -62,42 +53,41 @@ export default new QueryClient({
 
 - error처리를 react-query에게 맡길경우 위에 설정한 useErrorBoundary를 false로 변경해야 할 필요가 있음. <br />
   그래서 error 콜백을 넘겨줄 때에만 useErrorBoundary를 false로 변경처리 하기위해 useQuery를 한번 더 감싸서 onError가 있을 경우에만 변경되도록 처리한다.
-- react-query의 useQuery는 4가지의 generic을 받는다.<br />
-  여기서 TData는 TQueryFnData와 같게 설정해놓고, TError의 경우 AxiosError로 세팅해 놓았다.<br />
-  그래서 만들어놓은 useQuery hook을 실제로 호출 할 때에는 TQueryFnData인 매칭할 데이터 타입과 TQueryKey인 key값만 generic으로 넘겨주고 parameter에는 options객체 안에 api호출 함수인 queryFn과 onError등 을 넣어주면 된다.<br />
-  - TQueryFnData = unknown,<br />
-  - TError = unknown,<br />
-  - TData = TQueryFnData,<br />
-  - TQueryKey extends QueryKey = QueryKey<br />
+- 이때 파라미터로 url, params를 받아오고 만들어놓은 get함수를 호출하는 콜백을 queryFn 값으로 넘겨준다.
 
 ```tsx
-// src/hooks/useQuery.ts
-import { AxiosError } from 'axios'
-import {
-  useQuery as useQueryOrigin,
-  UseQueryOptions,
-  UseQueryResult,
-} from 'react-query'
+// src/hooks/useReactQuery.ts
+const get = async <T,>({
+  queryKey,
+}: Omit<QueryFunctionContext<TQueryKey>, 'meta'>): Promise<T> => {
+  const [url, params] = queryKey
+  const { data } = await api.get<T>(url, { ...params })
 
-type QueryKey = string | readonly unknown[]
-
-const useQuery = <T, K extends QueryKey>(
-  options?: UseQueryOptions<T, AxiosError, T, K>,
-): UseQueryResult<T, AxiosError> => {
-  const onError = options && options.onError
-
-  return useQueryOrigin<T, AxiosError, T, K>({
-    ...options,
-    useErrorBoundary: !onError,
-  })
+  return data
 }
 
-export default useQuery
+export const useQuery = <T,>(
+  url: string,
+  parmas?: object,
+  options?: Omit<UseQueryOptions<T, Error, T, TQueryKey>, 'queryKey'>,
+): UseQueryResult<T, Error> => {
+  const onError = options && options.onError
+
+  return useQueryOrigin<T, Error, T, TQueryKey>(
+    [url, parmas],
+    ({ queryKey }) => get<T>({ queryKey }),
+    {
+      enabled: !!url,
+      useErrorBoundary: !onError,
+      ...options,
+    },
+  )
+}
 ```
 
 ## style
 
-1. pattern
+1. <strong>pattern</strong>
 
    > - common components의 경우 atomic pattern을 적용하여<br /><br />
    >   | src/components/atoms <br />
@@ -106,41 +96,22 @@ export default useQuery
    >   | src/components/templates <br /><br />
    >   이렇게 4가지로 구분하였으며, 각 디렉터리에 요소들을 분리하기 위해서 추가로 하위 디렉터리를 만들어 구분한다.
 
-2. Theme
+2. <strong>Theme</strong>
 
-   > - src/ThemeDark.ts: 다크 테마에 적용할 스타일 값 선언
-   > - src/ThemeRight.ts: 기본 테마에 적용할 스타일 값 선언
+   > - src/ThemeRight.ts: DefaultTheme를 기준으로하여 기본 테마에 적용할 스타일 값 선언.
+   > - src/ThemeDark.ts: DefaultTheme를 기준으로하여 다크 테마에 적용할 스타일 값 선언.
 
-3. GlobalStyle
+3. <strong>style props interface</strong>
 
-   > - src/GlobalStyle.ts: 전역 스타일. 기본적으로 적용해 놓을 스타일 작성.
+> - src/styled.d.ts 에서 모든 style관련된 타입을 선언.
 
-4. Style props interface
+4. <strong>GlobalStyle</strong>
 
-   > - src/styleProps.ts: Theme와 각 components의 style에 적용할 interface 선언.
+> - src/GlobalStyle.ts: 전역 스타일. 기본적으로 적용해 놓을 스타일 작성.
 
-5. create styled components
-   > - 같은 Elements type 의 components를 여러개 만들 경우 basic styled components를 만들어 상속받아서 사용.
-   > - basic styled components는 props로 받아올 데이터를 선언해 놓은 인터페이스를 generic넣고, props들을 열거하여 theme와 그 외 props값을 같이 사용할 수 있게 한다.<br />
-   > - (현재 theme의 경우 any타입인 상태여서 theme의 Key값에 자동완성으로 접근 할 수없는 상태라서 보완이 필요 하다)
+5. <strong>create styled components</strong>
 
-```ts
-// basic style
-const Button = styled.button<IButtonStyleProps>`
-  ${({ size, fontColor, bgColor, theme }) => css`
-    width: ${theme.buttonWidth[size]};
-    height: ${theme.buttonHeight[size]};
-    color: ${fontColor ? theme.fontColors[fontColor] : theme.fontColors.base};
-    background-color: ${bgColor ? theme.colors[bgColor] : theme.colors.white};
-  `}
-`
+> - 같은 Elements type 의 components를 여러개 만들 경우 basic style을 가지고 있는 compnenet를 만들어 하위에서 상속받아서 사용.
+> - basic styled components는 generic에 IStyleProps interface를 상속받은 interface를 넣고, props들을 열거하여 theme와 그 외 props값을 같이 사용할 수 있게 한다.<br />
 
-const BasicButton = styled(Button)`
-  border: 1px solid black;
-`
-
-const RoundButton = styled(Button)`
-  border: 1px solid black;
-  border-radius: ${(props) => props.theme.calcRem(10)};
-`
-```
+https://github.com/detail54/react-reactquery-boilerplate/blob/fb36ce06a1ac6b66b9553877a96701955f1373b2/src/components/atoms/button/Button.styles.ts#L1-L42
