@@ -5,12 +5,12 @@ import { IPost } from './api/interface'
 import { useQuery } from './useReactQuery'
 
 const usePost = () => {
-  const getPosts = () => {
-    return useQuery<IPost[]>(API_URL.POSTS, undefined)
+  const getPosts = (onError?: (error: Error) => void) => {
+    return useQuery<IPost[]>(API_URL.POSTS, undefined, { onError })
   }
 
-  const getPost = (id: number) => {
-    return useQuery<IPost>(API_URL.POSTS, { id })
+  const getPost = (id: number, onError?: (error: Error) => void) => {
+    return useQuery<IPost>(`${API_URL.POSTS}/${id}`, undefined, { onError })
   }
 
   return {
