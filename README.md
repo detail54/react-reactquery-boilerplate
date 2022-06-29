@@ -12,7 +12,7 @@
 > - yarn install
 > - local: yarn start
 > - development: yarn start:dev
-> - production: yarn serve (yarn build && npx -l \<PORT\> -s build)
+> - production: yarn serve (yarn build && env-cmd -f .env.production npx serve -s build)
 > - <strong><span style='background-color: #f7dd; color: black'>실제 사용시 .gitignore에 .env파일들 주석 해제 해야함.</span></strong>
 
 ## directory structure
