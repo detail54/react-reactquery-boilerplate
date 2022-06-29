@@ -7,6 +7,14 @@
 > - styled-components v5.3.5
 > - styled-normalize v8.0.7
 
+# start
+
+> - yarn install
+> - local: yarn start
+> - development: yarn start:dev
+> - production: yarn serve (yarn build && npx -l \<PORT\> -s build)
+> - <strong><span style='background-color: #f7dd; color: black'>실제 사용시 .gitignore에 .env파일들 주석 해제 해야함.</span></strong>
+
 ## directory structure
 
 ```
@@ -31,9 +39,6 @@
     │       └── board
     │           ├── Board.styles.ts
     │           └── Board.tsx
-    ├── config
-    │   ├── axios.ts
-    │   └── reactQuery.ts
     ├── hooks
     │   ├── api
     │   │   ├── interface.ts
@@ -46,12 +51,15 @@
     │   ├── Header.styles.ts
     │   ├── Header.tsx
     │   └── Main.tsx
-    └── pages
-        ├── home
-        │   └── index.tsx
-        └── post
-            ├── Post.tsx
-            └── index.tsx
+    ├── pages
+    │   ├── home
+    │   │   └── index.tsx
+    │   └── post
+    │       ├── Post.tsx
+    │       └── index.tsx
+    └── utils
+        ├── axios.ts
+        └── reactQuery.ts
 ```
 
 ## server state

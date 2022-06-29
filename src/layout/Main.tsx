@@ -1,6 +1,6 @@
 import React from 'react'
 // lib
-import { BrowserRouter, Route, Routes, useMatch } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 // components
 import Home from 'pages/home'
 import Posts from 'pages/posts'

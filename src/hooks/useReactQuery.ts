@@ -9,7 +9,7 @@ import {
   MutationKey,
   QueryFunctionContext,
 } from 'react-query'
-import api from '../config/axios'
+import api from '../utils/axios'
 
 type TQueryKey = [string, object | undefined]
 

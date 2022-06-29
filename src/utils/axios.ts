@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios'
 
 const api: AxiosInstance = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com',
+  baseURL: process.env.REACT_APP_API_SERVER_URL,
   headers: {
     'Content-Type': 'application/json',
     'X-Access-Token': 'access-token',
