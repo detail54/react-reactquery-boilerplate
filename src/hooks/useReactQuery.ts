@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios'
 import {
   useQuery as useQueryOrigin,
   UseQueryOptions,
@@ -5,9 +6,8 @@ import {
   useMutation as useMutationOrigin,
   UseMutationOptions,
   UseMutationResult,
-  MutationFunction,
-  MutationKey,
   QueryFunctionContext,
+  useQueryClient,
 } from 'react-query'
 import api from '../utils/axios'
 
@@ -41,19 +41,54 @@ export const useQuery = <T>(
   )
 }
 
-export const useMutation = <T, V, C>(
-  mutationKey: MutationKey,
-  mutationFn: MutationFunction<T, V>,
+export const useMutation = <T, S>(
+  url: string,
+  mutationFn: (data: T | S) => Promise<AxiosResponse<S>>,
+  params?: object,
+  updater?: (oldData: T, newData: S) => T,
   options?: Omit<
-    UseMutationOptions<T, Error, V, C>,
-    'mutationKey' | 'mutationFn'
+    UseMutationOptions<AxiosResponse, Error, T | S>,
+    'mutationFn' | 'onMutate' | 'onError' | 'onSettled'
   >,
-): UseMutationResult<T, Error, V, C> => {
-  const onError = options && options.onError
+): UseMutationResult<AxiosResponse, Error, T | S> => {
+  const queryClient = useQueryClient()
 
-  return useMutationOrigin<T, Error, V, C>(mutationFn, {
+  return useMutationOrigin<AxiosResponse, Error, T | S>(mutationFn, {
+    onMutate: async (data) => {
+      await queryClient.cancelQueries([url, params])
+
+      const previousData = queryClient.getQueriesData([url, params])
+
+      queryClient.setQueriesData<T>([url, params], (oldData) => {
+        return updater && oldData ? updater(oldData, data as S) : (data as T)
+      })
+
+      return previousData
+    },
+    onError: (_, __, context) => {
+      queryClient.setQueryData([url, params], context)
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries([url, params])
+    },
     ...options,
-    mutationKey,
-    useErrorBoundary: !onError,
   })
+}
+
+export const usePostMutation = <T, S>(
+  url: string,
+  params?: object,
+  updater?: (oldData: T, newData: S) => T,
+  options?: Omit<
+    UseMutationOptions<AxiosResponse, Error, T | S>,
+    'mutationFn' | 'onMutate' | 'onError' | 'onSettled'
+  >,
+): UseMutationResult<AxiosResponse, Error, T | S> => {
+  return useMutation<T, S>(
+    url,
+    (data) => api.post<S>(url, { data, params }),
+    params,
+    updater,
+    options,
+  )
 }
