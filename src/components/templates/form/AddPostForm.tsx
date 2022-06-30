@@ -22,7 +22,7 @@ const AddPostForm: React.FC<IProps> = ({
   onSubmit,
 }) => {
   return (
-    <Form>
+    <Form onSubmit={(e) => e.preventDefault()}>
       <Text text='title' paddingY='md' />
       <Input value={title} onChange={onChangeTitle} paddingY='sm' />
       <Text text='body' paddingY='md' />

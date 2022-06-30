@@ -1,6 +1,6 @@
 import API_URL from './api/urls'
 // interface
-import { IPost, IPostBody } from './api/interface'
+import { IPost } from './api/interface'
 // hooks
 import { useQuery, usePostMutation } from './useReactQuery'
 
@@ -13,8 +13,8 @@ const usePost = () => {
     return useQuery<IPost>(`${API_URL.POSTS}/${id}`, undefined, { onError })
   }
 
-  const addPost = () => {
-    return usePostMutation<IPost[], IPostBody>(API_URL.POSTS, undefined)
+  const addPost = (updater: (oldData: IPost[], newData: IPost) => IPost[]) => {
+    return usePostMutation<IPost[], IPost>(API_URL.POSTS, undefined, updater)
   }
 
   return {
