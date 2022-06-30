@@ -9,6 +9,8 @@ interface IProps {
   size: TSize
   fontColor?: TFontColor
   bgColor?: TColor
+  marginY?: TSize<'zero'>
+  marginX?: TSize<'zero'>
   text: string
   onClick: () => void
 }
@@ -18,6 +20,8 @@ const Button: React.FC<IProps> = ({
   size,
   fontColor,
   bgColor,
+  marginY,
+  marginX,
   text,
   onClick,
 }) => {
@@ -28,6 +32,8 @@ const Button: React.FC<IProps> = ({
       size={size}
       fontColor={fontColor}
       bgColor={bgColor}
+      marginY={marginY}
+      marginX={marginX}
     >
       {text}
     </ButtonEl>
@@ -38,6 +44,8 @@ Button.defaultProps = {
   type: 'BasicButton',
   fontColor: 'black',
   bgColor: 'white',
+  marginY: undefined,
+  marginX: undefined,
 }
 
 export default Button
