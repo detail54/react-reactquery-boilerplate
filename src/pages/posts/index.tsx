@@ -2,7 +2,7 @@ import React from 'react'
 // components & type
 import { IListItemProps } from 'components/molecules/listItem/ListItem'
 import Board from 'components/templates/board/Board'
-import Button from 'components/atoms/button/Button'
+import LinkButton from 'components/atoms/button/LinkButton'
 // lib
 import { Link } from 'react-router-dom'
 // hooks
@@ -32,9 +32,7 @@ const Posts: React.FC = () => {
         height={500}
         isLoading={isLoading}
       />
-      <Link to='add'>
-        <Button size='md' text='Add post' onClick={() => {}} />
-      </Link>
+      <LinkButton size='md' text='Add post' link='add' />
     </PostsMain>
   )
 }

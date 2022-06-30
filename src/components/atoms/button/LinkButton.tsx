@@ -1,4 +1,6 @@
 import React from 'react'
+// lib
+import { useNavigate } from 'react-router-dom'
 // interface
 import { TColor, TFontColor, TSize } from 'styled-components'
 // styles
@@ -14,10 +16,10 @@ interface IProps {
   marginY?: TSize<'zero'>
   marginX?: TSize<'zero'>
   text: string
-  onClick: () => void
+  link: string
 }
 
-const Button: React.FC<IProps> = ({
+const LinkButton: React.FC<IProps> = ({
   type = 'BasicButton',
   size,
   fontColor,
@@ -25,24 +27,28 @@ const Button: React.FC<IProps> = ({
   marginY,
   marginX,
   text,
-  onClick,
+  link,
 }) => {
+  const navigate = useNavigate()
+  const onLink = () => {
+    navigate(link)
+  }
   const ButtonEl = Buttons[type]
   return (
     <ButtonEl
-      onClick={onClick}
       size={size}
       fontColor={fontColor}
       bgColor={bgColor}
       marginY={marginY}
       marginX={marginX}
+      onClick={onLink}
     >
       {text}
     </ButtonEl>
   )
 }
 
-Button.defaultProps = {
+LinkButton.defaultProps = {
   type: 'BasicButton',
   fontColor: 'black',
   bgColor: 'white',
@@ -50,4 +56,4 @@ Button.defaultProps = {
   marginX: undefined,
 }
 
-export default Button
+export default LinkButton
