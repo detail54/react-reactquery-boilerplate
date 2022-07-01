@@ -32,7 +32,7 @@ const Posts: React.FC = () => {
         height={500}
         isLoading={isLoading}
       />
-      <LinkButton size='md' text='Add post' link='add' />
+      <LinkButton size='md' text='Add post' link='add' marginY='sm' />
     </PostsMain>
   )
 }

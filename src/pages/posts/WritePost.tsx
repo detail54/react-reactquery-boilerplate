@@ -33,7 +33,7 @@ const WritePost: React.FC = () => {
       })
       navigate('/posts')
     } catch (e) {
-      console.log(e)
+      console.log('e:::', e)
     }
   }
 

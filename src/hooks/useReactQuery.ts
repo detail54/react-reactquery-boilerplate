@@ -48,9 +48,10 @@ export const useMutation = <T, S>(
   updater?: (oldData: T, newData: S) => T,
   options?: Omit<
     UseMutationOptions<AxiosResponse, Error, T | S>,
-    'mutationFn' | 'onMutate' | 'onError' | 'onSettled'
+    'mutationFn' | 'onMutate' | 'onSettled'
   >,
 ): UseMutationResult<AxiosResponse, Error, T | S> => {
+  const onError = options && options.onError
   const queryClient = useQueryClient()
 
   return useMutationOrigin<AxiosResponse, Error, T | S>(mutationFn, {
@@ -65,9 +66,12 @@ export const useMutation = <T, S>(
 
       return previousData
     },
-    onError: (_, __, context) => {
-      queryClient.setQueryData([url, params], context)
-    },
+    onError,
+    // onError:
+    //   errFn ||
+    //   ((error, variables, context) => {
+    //     queryClient.setQueryData([url, params], context)
+    //   }),
     onSettled: () => {
       queryClient.invalidateQueries([url, params])
     },

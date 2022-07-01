@@ -5,7 +5,7 @@ const API_URL = {
   PHOTOS: 'photos',
   TODOS: 'todos',
   USERS: 'users',
-  ERRORTEST: 'error',
+  ERROR_TEST: 'error',
 }
 
 export default API_URL

@@ -1,4 +1,7 @@
+import useApiError from 'hooks/useApiError'
 import { QueryClient } from 'react-query'
+
+const { handleError } = useApiError()
 
 export default new QueryClient({
   defaultOptions: {
