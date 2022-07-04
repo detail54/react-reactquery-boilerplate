@@ -5,14 +5,10 @@ import usePost from 'hooks/usePost'
 import { useMatch } from 'react-router-dom'
 
 const Post: React.FC = () => {
-  const pathId = useMatch('posts/:id')?.params.id
-  const id = Number(pathId)
-  const onError = (error: Error) => {
-    console.log(error)
-  }
+  const id = Number(useMatch('posts/:id')?.params.id)
 
   const { getPost } = usePost()
-  const { data: postData, isLoading, error, isError } = getPost(id, onError)
+  const { data: postData, isLoading, error, isError } = getPost(id)
 
   return <div>{postData?.body}</div>
 }

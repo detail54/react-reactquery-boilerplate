@@ -9,12 +9,13 @@ import PostsMain from './index.styles'
 
 const WritePost: React.FC = () => {
   const navigate = useNavigate()
+
   const { addPost } = usePost()
   const mutationAdd = addPost((oldData, newData) => [...oldData, newData])
 
-  const userId = 1
   const [title, setTitle] = useState<string>('')
   const [body, setBody] = useState<string>('')
+  const userId = 1
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.currentTarget.value)
@@ -31,9 +32,9 @@ const WritePost: React.FC = () => {
         body,
         userId,
       })
-      navigate('/posts')
+      navigate(-1)
     } catch (e) {
-      console.log('e:::', e)
+      navigate('/posts')
     }
   }
 
@@ -50,4 +51,4 @@ const WritePost: React.FC = () => {
   )
 }
 
-export default WritePost
+export default React.memo(WritePost)

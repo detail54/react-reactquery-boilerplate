@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios'
+import { AxiosError, AxiosResponse } from 'axios'
 import {
   useQuery as useQueryOrigin,
   UseQueryOptions,
@@ -6,35 +6,40 @@ import {
   useMutation as useMutationOrigin,
   UseMutationOptions,
   UseMutationResult,
-  QueryFunctionContext,
   useQueryClient,
 } from 'react-query'
 import api from '../utils/axios'
+import useApiError, { TErrorHandlers } from './useApiError'
 
 type TQueryKey = [string, object | undefined]
-
-const get = async <T>({
-  queryKey,
-}: Omit<QueryFunctionContext<TQueryKey>, 'meta'>): Promise<T> => {
-  const [url, params] = queryKey
-  const { data } = await api.get<T>(url, { ...params })
-
-  return data
-}
+export type TQueryErr = (err: AxiosError) => void
+export type TMutationErr = (
+  error: AxiosError,
+  variables: unknown,
+  context: unknown,
+) => void | Promise<unknown>
 
 export const useQuery = <T>(
   url: string,
-  parmas?: object,
-  options?: Omit<UseQueryOptions<T, Error, T, TQueryKey>, 'queryKey'>,
-): UseQueryResult<T, Error> => {
-  const onError = options && options.onError
+  params?: object,
+  errorHandlers?: TErrorHandlers,
+  onError?: TQueryErr,
+  options?: Omit<
+    UseQueryOptions<T, AxiosError, T, TQueryKey>,
+    'queryKey' | 'onError'
+  >,
+): UseQueryResult<T, AxiosError> => {
+  const { handleQueryError } = useApiError(errorHandlers)
 
-  return useQueryOrigin<T, Error, T, TQueryKey>(
-    [url, parmas],
-    ({ queryKey }) => get<T>({ queryKey }),
+  return useQueryOrigin<T, AxiosError, T, TQueryKey>(
+    [url, params],
+    async () => {
+      const { data } = await api.get<T>(url, { ...params })
+      return data
+    },
     {
       enabled: !!url,
-      onError,
+      onError: onError || handleQueryError,
       useErrorBoundary: !onError,
       ...options,
     },
@@ -45,16 +50,19 @@ export const useMutation = <T, S>(
   url: string,
   mutationFn: (data: T | S) => Promise<AxiosResponse<S>>,
   params?: object,
+  errorHandlers?: TErrorHandlers,
   updater?: (oldData: T, newData: S) => T,
+  onError?: TMutationErr,
   options?: Omit<
-    UseMutationOptions<AxiosResponse, Error, T | S>,
-    'mutationFn' | 'onMutate' | 'onSettled'
+    UseMutationOptions<AxiosResponse, AxiosError, T | S>,
+    'mutationFn' | 'onMutate' | 'onSettled' | 'onError'
   >,
-): UseMutationResult<AxiosResponse, Error, T | S> => {
-  const onError = options && options.onError
+): UseMutationResult<AxiosResponse, AxiosError, T | S> => {
+  const { handleMutationError } = useApiError(errorHandlers)
+
   const queryClient = useQueryClient()
 
-  return useMutationOrigin<AxiosResponse, Error, T | S>(mutationFn, {
+  return useMutationOrigin<AxiosResponse, AxiosError, T | S>(mutationFn, {
     onMutate: async (data) => {
       await queryClient.cancelQueries([url, params])
 
@@ -66,12 +74,7 @@ export const useMutation = <T, S>(
 
       return previousData
     },
-    onError,
-    // onError:
-    //   errFn ||
-    //   ((error, variables, context) => {
-    //     queryClient.setQueryData([url, params], context)
-    //   }),
+    onError: onError || handleMutationError,
     onSettled: () => {
       queryClient.invalidateQueries([url, params])
     },
@@ -82,17 +85,21 @@ export const useMutation = <T, S>(
 export const usePostMutation = <T, S>(
   url: string,
   params?: object,
+  errorHandlers?: TErrorHandlers,
   updater?: (oldData: T, newData: S) => T,
+  onError?: TMutationErr,
   options?: Omit<
-    UseMutationOptions<AxiosResponse, Error, T | S>,
-    'mutationFn' | 'onMutate' | 'onError' | 'onSettled'
+    UseMutationOptions<AxiosResponse, AxiosError, T | S>,
+    'mutationFn' | 'onMutate' | 'onSettled' | 'onError'
   >,
-): UseMutationResult<AxiosResponse, Error, T | S> => {
+): UseMutationResult<AxiosResponse, AxiosError, T | S> => {
   return useMutation<T, S>(
     url,
     (data) => api.post<S>(url, { data, params }),
     params,
+    errorHandlers,
     updater,
+    onError,
     options,
   )
 }

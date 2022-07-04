@@ -1,23 +1,45 @@
 import { useCallback } from 'react'
+// lib
 import { AxiosError } from 'axios'
-import defaultErrorHandlers from './api/defaultErrorHandlers'
+// error handler
+import defaultQueryErrHandlers from './api/defaultQueryErrHandlers'
+import defaultMutationErrHandlers from './api/defaultMutationErrHandlers copy'
 
-const useApiError = (handlers?: Record<number | string, () => void>) => {
-  const handleError = useCallback(
+export type TErrorHandlers = Record<
+  number | string,
+  (error: AxiosError) => void
+>
+
+const useApiError = (handlers?: TErrorHandlers) => {
+  const handleQueryError = useCallback(
     (error: AxiosError) => {
       const httpStatus = error.response?.status || 0
-      const handler = handlers || defaultErrorHandlers
+      const handler = handlers || defaultQueryErrHandlers
 
       if (httpStatus) {
-        handler[httpStatus]()
+        handler[httpStatus](error)
       } else {
-        defaultErrorHandlers.default()
+        defaultQueryErrHandlers.default(error)
       }
     },
     [handlers],
   )
 
-  return { handleError }
+  const handleMutationError = useCallback(
+    (error: AxiosError, variables: unknown, context: unknown) => {
+      const httpStatus = error.response?.status || 0
+      const handler = handlers || defaultMutationErrHandlers
+
+      if (httpStatus) {
+        handler[httpStatus](error)
+      } else {
+        defaultMutationErrHandlers.default(error)
+      }
+    },
+    [handlers],
+  )
+
+  return { handleQueryError, handleMutationError }
 }
 
 export default useApiError
