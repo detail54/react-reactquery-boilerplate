@@ -22,8 +22,8 @@ export type TMutationErr = (
 export const useQuery = <T>(
   url: string,
   params?: object,
-  errorHandlers?: TErrorHandlers,
   onError?: TQueryErr,
+  errorHandlers?: TErrorHandlers,
   options?: Omit<
     UseQueryOptions<T, AxiosError, T, TQueryKey>,
     'queryKey' | 'onError'
@@ -85,9 +85,9 @@ export const useMutation = <T, S>(
 export const usePostMutation = <T, S>(
   url: string,
   params?: object,
-  errorHandlers?: TErrorHandlers,
   updater?: (oldData: T, newData: S) => T,
   onError?: TMutationErr,
+  errorHandlers?: TErrorHandlers,
   options?: Omit<
     UseMutationOptions<AxiosResponse, AxiosError, T | S>,
     'mutationFn' | 'onMutate' | 'onSettled' | 'onError'

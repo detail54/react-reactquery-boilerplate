@@ -11,16 +11,11 @@ import {
 
 const usePost = () => {
   const getPosts = (onError?: TQueryErr) => {
-    return useQuery<IPost[]>(API_URL.POSTS, undefined, undefined, onError)
+    return useQuery<IPost[]>(API_URL.POSTS, undefined, onError)
   }
 
   const getPost = (id: number, onError?: TQueryErr) => {
-    return useQuery<IPost>(
-      `${API_URL.POSTS}/${id}`,
-      undefined,
-      undefined,
-      onError,
-    )
+    return useQuery<IPost>(`${API_URL.POSTS}/${id}`, undefined, onError)
   }
 
   const addPost = (
@@ -29,7 +24,6 @@ const usePost = () => {
   ) => {
     return usePostMutation<IPost[], IPost>(
       API_URL.ERROR_TEST,
-      undefined,
       undefined,
       updater,
       onError,
