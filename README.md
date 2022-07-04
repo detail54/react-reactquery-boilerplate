@@ -41,8 +41,11 @@
     │           └── Board.tsx
     ├── hooks
     │   ├── api
+    │   │   ├── defaultQueryErrHandlers.ts
+    │   │   ├── defaultMutationErrHandlers.ts
     │   │   ├── interface.ts
     │   │   └── urls.ts
+    │   ├── useApiError.ts
     │   ├── usePost.ts
     │   └── useReactQuery.ts
     ├── layout
@@ -67,17 +70,60 @@
 - axios를 사용하여 api 통신한다.<br />
   instance 객체를 생성하여 기본 설정값을 세팅 해 놓고 import 해서 사용.
   https://github.com/detail54/react-reactquery-boilerplate/blob/a51cbc7b7f5331043955d1dcd28fd4e3fc8ecddd/src/config/axios.ts#L1-L12
+- src/hooks/api/urls.ts 에서 api Url 관리.
+- src/hooks/api/interface.ts 에서 api 데이터들의 interface 관리.
 
 - react-query를 사용하여 server state관리.<br />
-  QueryClient의 기본설정 세팅하여 모든 hook에 설정 적용되도록 함.<br />
-  useErrorBoundary를 true로 설정하여 호출한 곳 에서 직접 에러를 처리하도록 함.
+  QueryClient의 기본설정 적용.<br />
   https://github.com/detail54/react-reactquery-boilerplate/blob/a51cbc7b7f5331043955d1dcd28fd4e3fc8ecddd/src/config/reactQuery.ts#L1-L16
 
-- error처리를 react-query에게 맡길경우 위에 설정한 useErrorBoundary를 false로 변경해야 할 필요가 있음. <br />
-  그래서 error 콜백을 넘겨줄 때에만 useErrorBoundary를 false로 변경처리 하기위해 useQuery를 한번 더 감싸서 onError가 있을 경우에만 변경되도록 처리한다.<br />
-  실제로 useQuery를 사용할때는 react-query 가 아닌 src/hooks/useReactQuery 의 useQuery를 사용.
-- 이때 파라미터로 url, params를 받아오고 만들어놓은 get함수를 호출하는 콜백을 queryFn 값으로 넘겨준다.
-  https://github.com/detail54/react-reactquery-boilerplate/blob/a51cbc7b7f5331043955d1dcd28fd4e3fc8ecddd/src/hooks/useReactQuery.ts#L1-L42
+- src/hooks/useReactQuery.ts<br />
+  useQuery와 useMutation을 한번 더 감싸서 각 component의 api호출 hook에서 넘겨준 값을 기준으로 옵션을 분기하여 처리한다.
+  https://github.com/detail54/react-reactquery-boilerplate/blob/3838d8efec9718f09928484dbc8d6439921acf2a/src/hooks/useReactQuery.ts#L1-L83
+
+- <strong>error처리</strong><br />
+
+  1. src/hooks/api/defaultQueryErrHandlers.ts | defaultMutationErrHandlers.ts 에서 useQuery와 useMutation에 default로 적용할 error callback을 respose status별로 선언.
+     https://github.com/detail54/react-reactquery-boilerplate/blob/3838d8efec9718f09928484dbc8d6439921acf2a/src/hooks/api/defaultQueryErrHandlers.ts#L1-L22
+  2. src/hooks/useReactQuery.ts 에서 useQuery와 useMutation에서 property로 받아온 onError콜백이 없을경우 위 1번 에서 선언된 default err callback으로 세팅.
+  3. default err 외에 다른 error callback을 사용할 경우, src/hooks/useApiError.ts에 선언되어있는 TErrorHandlers 타입의 객체를 인자로 넘겨주거나, onError 함수를 넘겨주면 된다.
+  4. error callback의 우선 순위는<br />
+     onError > errorHandlers > defaultErrHandlers<br />
+     위 순서로, onError값을 넘겨줄때 가장 우선순위가 높고 그 다음으로 TErrorHandlers 타입의 객체를 넘겨줬을 때 이다.
+
+- <strong>흐름</strong><br />
+
+  1. useReactQuery.ts -> useQuery와 useMutation 래핑하여 설정.
+  2. usePost.ts -> 각 hook에서 필요한 api호출 데이터를 useReactQuery의 useQuery와 useMutation을 사용하여 리턴. 이때 넘기지 않을 중간에 위치한 값은 undefined로 설정.
+     https://github.com/detail54/react-reactquery-boilerplate/blob/3838d8efec9718f09928484dbc8d6439921acf2a/src/hooks/usePost.ts#L1-L46
+  3. 각 component 에서 hook 호출.
+
+  ```ts
+  /// query
+  const Post: React.FC = () => {
+    const id = Number(useMatch('posts/:id')?.params.id)
+
+    const { getPost } = usePost()
+    const { data: postData, isLoading, error, isError } = getPost(id)
+
+    return <div>{postData?.body}</div>
+  }
+
+  //// mutation
+  const mutationAdd = addPost((oldData, newData) => [...oldData, newData])
+  const onSubmit = async () => {
+    try {
+      await mutationAdd.mutateAsync({
+        title,
+        body,
+        userId,
+      })
+      navigate(-1)
+    } catch (e) {
+      navigate('/posts')
+    }
+  }
+  ```
 
 ## style
 

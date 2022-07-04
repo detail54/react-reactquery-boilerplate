@@ -3,7 +3,7 @@ import { useCallback } from 'react'
 import { AxiosError } from 'axios'
 // error handler
 import defaultQueryErrHandlers from './api/defaultQueryErrHandlers'
-import defaultMutationErrHandlers from './api/defaultMutationErrHandlers copy'
+import defaultMutationErrHandlers from './api/defaultMutationErrHandlers'
 
 export type TErrorHandlers = Record<
   number | string,
