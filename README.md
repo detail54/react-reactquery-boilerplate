@@ -90,6 +90,7 @@
   4. error callback의 우선 순위는<br />
      onError > errorHandlers > defaultErrHandlers<br />
      위 순서로, onError값을 넘겨줄때 가장 우선순위가 높고 그 다음으로 TErrorHandlers 타입의 객체를 넘겨줬을 때 이다.
+  5. http status 외에 다른 상태에 대한 callback을 선언 하고싶다면 useApiError.ts에서 해당 키값을 분기처리 해야한다.
 
 - <strong>흐름</strong><br />
 

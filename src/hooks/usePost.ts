@@ -15,7 +15,13 @@ const usePost = () => {
   }
 
   const getPost = (id: number, onError?: TQueryErr) => {
-    return useQuery<IPost>(`${API_URL.POSTS}/${id}`, undefined, onError)
+    return useQuery<IPost>(
+      `${API_URL.POSTS}/${id}`,
+      undefined,
+      onError,
+      undefined,
+      { cacheTime: 100000 },
+    )
   }
 
   const addPost = (
@@ -23,7 +29,7 @@ const usePost = () => {
     onError?: TMutationErr,
   ) => {
     return usePostMutation<IPost[], IPost>(
-      API_URL.ERROR_TEST,
+      API_URL.POSTS,
       undefined,
       updater,
       onError,
